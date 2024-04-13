@@ -1,0 +1,20 @@
+
+
+CC  = g++
+
+CFLAGS = -Wall -std=c++11
+
+SRCS = Person.cpp Date.cpp Staff.cpp main.cpp
+
+OBJS = $(SRCS:.cpp = .o)
+
+EXEC = main
+all: $(EXEC)
+	./$(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+clean:
+	rm -f %.o %.exe
