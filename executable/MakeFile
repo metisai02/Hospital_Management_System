@@ -4,7 +4,7 @@ CC  = g++
 
 CFLAGS = -Wall -std=c++11
 
-SRCS = Person.cpp Date.cpp Staff.cpp main.cpp
+SRCS = ../Person.cpp ../Date.cpp ../Staff.cpp ../main.cpp
 
 OBJS = $(SRCS:.cpp = .o)
 
@@ -16,5 +16,5 @@ $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
-clean:
-	rm -f %.o %.exe
+# clean:
+# 	rm -f %.o %.exe

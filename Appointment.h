@@ -2,6 +2,9 @@
 #define APPOINTMENT_H
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
 #include "Staff.h"
 #include "Date.h"
 #include "Patient.h"
@@ -23,6 +26,7 @@ public:
     void removeAppointment();
 
 private:
+    int id;
     Patient patient;
     Staff doctor;
     Date dateSchedule;

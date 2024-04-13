@@ -4,6 +4,7 @@
 #include "Date.h"
 #include "string"
 #include <fstream>
+#include <vector>
 #pragma once
 
 class Staff : public Person
@@ -15,8 +16,10 @@ public:
     void setSpecialist();
     std::string getSpecialist();
 
-    void setIDStaff(int);
+    void setIDStaff();
     int getIDStaff();
+
+    void setIDApointments(int);
 
     void displayDetail() override;
     virtual void addPerson() override;

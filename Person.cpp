@@ -70,7 +70,27 @@ Date Person::getBirthDate()
 {
     return this->birthDay;
 }
-
+void Person::setIDApointments(int id)
+{
+    cout << "Adding apointments id: " << id << endl;
+    this->IDApointments.push_back(id);
+}
+void Person::getIDApointments()
+{
+    int coutApointment = 0;
+    for (auto apointment : IDApointments)
+    {
+        cout << "ID apointment " << ++coutApointment << "is: " << apointment << endl;
+    }
+}
+void Person::setRole(std::string &role)
+{
+    this->role = role;
+}
+std::string Person::getRole()
+{
+    return this->role;
+}
 void Person::addPerson()
 {
     setFirstName();
