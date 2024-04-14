@@ -24,6 +24,21 @@ Staff Appointment::getDoctor()
 {
     return this->doctor;
 }
+void Appointment::setDateSchedule(Date schedule)
+{
+    this->dateSchedule = schedule;
+}
+Date Appointment::getDateSchedule()
+{
+}
+void Appointment::setStatus(int status)
+{
+    this->status = (status ? 1 : 0);
+}
+int Appointment::getStatus()
+{
+    return this->status;
+}
 void Appointment::addAppointment()
 {
     // serch in data base and then adding patient and doctor
@@ -34,27 +49,18 @@ void Appointment::addAppointment()
     {
         this->patient.addPerson();
     }
-    cout << "Choose a doctor that you want to take apointment!!!" << endl;
-    string firstname;
-    string lastname;
-    int age;
-    string IDnumber;
-    string role;
-    string specialization;
-    // reading stafff data from CSV file
-    fstream fileStaff;
-    fileStaff.open("staff.csv", ios::app);
-    string line, word;
-    vector<string> row;
-    getline(fileStaff, line);
-    stringstream ssLine(line);
-    while (getline(ssLine, word, ','))
+    else
     {
-        row.push_back(word);
+        Hospital::displayStaffs();
+        int tmp_id;
+        cout << "Enter your ID patient: ";
+        cin >> tmp_id;
     }
-    
-    setPatient(patient);
-    setDocor(doctor);
+    cout << "Choose a ID doctor that you want to take apointment!!!" << endl;
+    Hospital::displayStaffs();
+    int idStaff;
+    cin >> idStaff;
+    this->doctor = Hospital::mapStaff[idStaff];
 }
 
 void Appointment::removeAppointment()
