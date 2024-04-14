@@ -18,25 +18,28 @@ public:
     Person();
     ~Person();
 
-    void setFirstName();
+    void setFirstName(std::string);
     std::string getFirstName();
 
-    void setLastName();
+    void setLastName(std::string);
     std::string getLastName();
 
-    void setAge();
+    void setAge(int);
     int getAge();
 
-    void setIDNumber();
+    void setIDNumber(std::string);
     std::string getIDNumber();
-
-    void setBirthDate();
+    void setID(int);
+    int getID();
+    void setBirthDate(Date);
     Date getBirthDate();
     void setIDApointments(int);
     void getIDApointments();
 
     void setRole(std::string &);
     std::string getRole();
+
+    // method
     virtual void addPerson();
     virtual void removePerson();
     virtual void displayDetail();

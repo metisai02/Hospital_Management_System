@@ -13,22 +13,22 @@ public:
     ~Date();
 
     unsigned int getMin();
-    void setMin();
+    void setMin(int);
 
     unsigned int getHour();
-    void setHour();
+    void setHour(int);
 
     unsigned int getDay();
-    void setDay();
+    void setDay(int);
 
     unsigned int getMonth();
-    void setMonth();
+    void setMonth(int);
 
     unsigned int getYear();
-    void setYear();
+    void setYear(int);
 
-    void addFull();
-    void addHalf();
+    void addFull(Date);
+    Date addHalf(unsigned int, unsigned int, unsigned int);
 
 private:
     unsigned int min;

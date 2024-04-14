@@ -12,11 +12,9 @@ unsigned int Date::getMin()
 {
     return this->min;
 }
-void Date::setMin()
+void Date::setMin(int min)
 {
-    unsigned int min;
-    cout << "Enter min: ";
-    cin >> min;
+
     if (min < 60)
         this->min = min;
     else
@@ -27,12 +25,10 @@ unsigned int Date::getHour()
 {
     return this->hour;
 }
-void Date::setHour()
+void Date::setHour(int hour)
 {
-    unsigned int hour;
-    cout << "Enter hour: ";
-    cin >> hour;
-    if (min < 24)
+
+    if (hour < 24)
         this->hour = hour;
     else
         throw invalid_argument("Hour is not valid !");
@@ -42,11 +38,8 @@ unsigned int Date::getDay()
 {
     return this->day;
 }
-void Date::setDay()
+void Date::setDay(int day)
 {
-    unsigned int day;
-    cout << "Enter day: ";
-    cin >> day;
     if (day <= 31)
         this->day = day;
     else
@@ -57,11 +50,9 @@ unsigned int Date::getMonth()
 {
     return this->month;
 }
-void Date::setMonth()
+void Date::setMonth(int month)
 {
-    unsigned int month;
-    cout << "Enter month: ";
-    cin >> month;
+
     if (month <= 12)
         this->month = month;
     else
@@ -72,30 +63,29 @@ unsigned int Date::getYear()
 {
     return this->year;
 }
-void Date::setYear()
+void Date::setYear(int year)
 {
-    unsigned int year;
-    cout << "Enter year: ";
-    cin >> year;
+
     if (year <= 2024)
         this->year = year;
     else
-        throw invalid_argument("year is not valid !");
+        throw invalid_argument("Year is not valid !");
 }
 
-void Date::addFull()
+void Date::addFull(Date date)
 {
-    setMin();
-    setHour();
-    setDay();
-    setMonth();
-    setYear();
+    setMin(date.min);
+    setHour(date.hour);
+    setDay(date.day);
+    setMonth(date.month);
+    setYear(date.year);
 }
-void Date::addHalf()
+Date Date::addHalf(unsigned int day, unsigned int month, unsigned int year)
 {
     this->min = 0;
     this->hour = 0;
-    setDay();
-    setMonth();
-    setYear();
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+    return *this;
 }

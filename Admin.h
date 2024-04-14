@@ -3,7 +3,7 @@
 #include "Person.h"
 #pragma once
 
-class Admin:public person
+class Admin:public Person
 {
 public:
     Admin();

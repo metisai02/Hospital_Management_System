@@ -7,11 +7,9 @@ Person::Person()
 Person::~Person()
 {
 }
-void Person::setFirstName()
+void Person::setFirstName(std::string firstname)
 {
-    string firstname;
-    cout << "Enter first name: ";
-    cin >> firstname;
+
     this->firstName = firstname;
 }
 std::string Person::getFirstName()
@@ -19,11 +17,9 @@ std::string Person::getFirstName()
     return this->firstName;
 }
 
-void Person::setLastName()
+void Person::setLastName(string lastname)
 {
-    string lastname;
-    cout << "Enter last name: ";
-    cin >> lastname;
+
     this->lastName = lastname;
 }
 std::string Person::getLastName()
@@ -31,11 +27,9 @@ std::string Person::getLastName()
     return this->lastName;
 }
 
-void Person::setAge()
+void Person::setAge(int age)
 {
-    int age;
-    cout << "Enter age: ";
-    cin >> age;
+
     if (age > 0 && age < 100)
         this->age = age;
     else
@@ -46,11 +40,9 @@ int Person::getAge()
     return this->age;
 }
 
-void Person::setIDNumber()
+void Person::setIDNumber(string idNumber)
 {
-    string idNumber;
-    cout << "Enter ID number with 10 digits: ";
-    cin >> idNumber;
+
     if (idNumber.size() == 10)
         this->IDNumber = idNumber;
     else
@@ -60,11 +52,18 @@ std::string Person::getIDNumber()
 {
     return this->IDNumber;
 }
-void Person::setBirthDate()
+void Person::setID(int id)
 {
 
-    cout << "Set your birth day" << endl;
-    this->birthDay.addHalf();
+    this->id = id;
+}
+int Person::getID()
+{
+    return this->id;
+}
+void Person::setBirthDate(Date date)
+{
+    this->birthDay.addHalf(date.getDay(), date.getMonth(), date.getYear());
 }
 Date Person::getBirthDate()
 {
@@ -93,11 +92,37 @@ std::string Person::getRole()
 }
 void Person::addPerson()
 {
-    setFirstName();
-    setLastName();
-    setAge();
-    setBirthDate();
-    setIDNumber();
+    // int id;
+    // cout << "Enter id: ";
+    // cin >> id;
+    // setID();
+    string firstname;
+    cout << "Enter first name: ";
+    cin >> firstname;
+    setFirstName(firstname);
+    string lastname;
+    cout << "Enter last name: ";
+    cin >> lastname;
+    setLastName(lastname);
+    int age;
+    cout << "Enter age: ";
+    cin >> age;
+    setAge(age);
+    cout << "Set your birth day" << endl;
+    unsigned int day;
+    cout << "Enter day: ";
+    cin >> day;
+    unsigned int month;
+    cout << "Enter month: ";
+    cin >> month;
+    unsigned int year;
+    cout << "Enter year: ";
+    cin >> year;
+    setBirthDate(birthDay.addHalf(day,month,year));
+    string idNumber;
+    cout << "Enter ID number with 10 digits: ";
+    cin >> idNumber;
+    setIDNumber(idNumber);
 }
 void Person::removePerson()
 {

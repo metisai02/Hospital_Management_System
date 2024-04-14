@@ -3,6 +3,8 @@
 #include "Person.h"
 #include "Date.h"
 #include "string"
+#include "Hospital.h"
+#include <sstream>
 #include <fstream>
 #include <vector>
 #pragma once
@@ -13,21 +15,19 @@ public:
     Staff();
     ~Staff();
 
-    void setSpecialist();
+    void setSpecialist(std::string);
     std::string getSpecialist();
-
-    void setIDStaff();
-    int getIDStaff();
 
     void setIDApointments(int);
 
-    void displayDetail() override;
+    virtual void displayDetail() override;
     virtual void addPerson() override;
     virtual void removePerson() override;
+    void checkAppointments();
+    void earseAppointments(int);
 
 private:
     std::string specialization;
-    int IDStaff;
 };
 
 #endif

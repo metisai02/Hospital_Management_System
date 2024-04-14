@@ -8,6 +8,7 @@
 #include "Staff.h"
 #include "Date.h"
 #include "Patient.h"
+#include "Hospital.h"
 #pragma once
 
 class Appointment
@@ -22,6 +23,11 @@ public:
     void setDocor(Staff &);
     Staff getDoctor();
 
+    void setStatus(int);
+    int getStatus();
+    
+    void setDateSchedule(Date);
+    Date getDateSchedule();
     void addAppointment();
     void removeAppointment();
 
@@ -30,6 +36,7 @@ private:
     Patient patient;
     Staff doctor;
     Date dateSchedule;
+    int status;
 };
 
 #endif
