@@ -1,8 +1,14 @@
 
 #include "Person.h"
+#include <iostream>
+#include <fstream>
+#include <stdexcept>
+#include <vector>
+
 using namespace std;
 Person::Person()
 {
+    this->age = 0;
 }
 Person::~Person()
 {
@@ -52,15 +58,7 @@ std::string Person::getIDNumber()
 {
     return this->IDNumber;
 }
-void Person::setID(int id)
-{
 
-    this->id = id;
-}
-int Person::getID()
-{
-    return this->id;
-}
 void Person::setBirthDate(Date date)
 {
     this->birthDay.addHalf(date.getDay(), date.getMonth(), date.getYear());
@@ -92,10 +90,7 @@ std::string Person::getRole()
 }
 void Person::addPerson()
 {
-    // int id;
-    // cout << "Enter id: ";
-    // cin >> id;
-    // setID();
+    User::addUser();
     string firstname;
     cout << "Enter first name: ";
     cin >> firstname;
@@ -118,7 +113,7 @@ void Person::addPerson()
     unsigned int year;
     cout << "Enter year: ";
     cin >> year;
-    setBirthDate(birthDay.addHalf(day,month,year));
+    setBirthDate(birthDay.addHalf(day, month, year));
     string idNumber;
     cout << "Enter ID number with 10 digits: ";
     cin >> idNumber;

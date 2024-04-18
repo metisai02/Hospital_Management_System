@@ -1,17 +1,14 @@
 #ifndef PERSON_H
 #define PERSON_H
 #include <string>
-#include <iostream>
-#include <fstream>
-#include <stdexcept>
-#include <vector>
 #include "Date.h"
-
+#include <vector>
+#include "User.h"
 // #include "User.h"
 
-#pragma once
+// #pragma once
 
-class Person
+class Person : public User
 {
 public:
     // Person(std::string, std::string, int, std::string, Date, User);
@@ -29,8 +26,6 @@ public:
 
     void setIDNumber(std::string);
     std::string getIDNumber();
-    void setID(int);
-    int getID();
     void setBirthDate(Date);
     Date getBirthDate();
     void setIDApointments(int);
@@ -43,9 +38,9 @@ public:
     virtual void addPerson();
     virtual void removePerson();
     virtual void displayDetail();
+    virtual void function() = 0;
 
 private:
-    int id;
     std::string firstName;
     std::string lastName;
     int age;

@@ -3,11 +3,8 @@
 #include "Person.h"
 #include "Date.h"
 #include "string"
-#include "Hospital.h"
-#include <sstream>
-#include <fstream>
 #include <vector>
-#pragma once
+// #pragma once
 
 class Staff : public Person
 {
@@ -18,11 +15,13 @@ public:
     void setSpecialist(std::string);
     std::string getSpecialist();
 
-    void setIDApointments(int);
+    // void setIDApointments(int);
 
     virtual void displayDetail() override;
     virtual void addPerson() override;
     virtual void removePerson() override;
+    virtual void function() override;
+    
     void checkAppointments();
     void earseAppointments(int);
 

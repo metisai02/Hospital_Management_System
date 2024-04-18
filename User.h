@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include "string"
-#pragma once
+// #pragma once
 
 class User
 {
@@ -14,10 +14,15 @@ public:
 
     void setPassWord(std::string);
     std::string getPassWord();
+    void setID(int);
+    int getID();
 
-private:
+    void addUser();
+
+private:                                                                            
     std::string userName;
-    std::string passWord;
-};
-
+    std::string passWord;   
+    int id;
+};  
+    
 #endif

@@ -1,13 +1,23 @@
 #include "Appointment.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+#include "Staff.h"
+#include "Patient.h"
+#include "Hospital.h"
 using namespace std;
 Appointment::Appointment()
 {
+    this->id = -1;
+    this->patient.setID(-1);
+    this->staff.setID(-1);
+    this->status = -1;
 }
 
-Appointment::~Appointment()
-{
-}
-void Appointment::setPatient(Patient &patient)
+void Appointment::setPatient(Patient& patient)
 {
     this->patient = patient;
 }
@@ -16,20 +26,21 @@ Patient Appointment::getPatient()
     return this->patient;
 }
 
-void Appointment::setDocor(Staff &doctor)
+void Appointment::setStaff(Staff &staff)
 {
-    this->doctor = doctor;
+    this->staff = staff;
 }
-Staff Appointment::getDoctor()
+Staff Appointment::getStaff()
 {
-    return this->doctor;
+    return this->staff;
 }
-void Appointment::setDateSchedule(Date schedule)
+void Appointment::setDateSchedule(Date& schedule)
 {
     this->dateSchedule = schedule;
 }
 Date Appointment::getDateSchedule()
 {
+    return this->dateSchedule;
 }
 void Appointment::setStatus(int status)
 {
@@ -60,7 +71,7 @@ void Appointment::addAppointment()
     Hospital::displayStaffs();
     int idStaff;
     cin >> idStaff;
-    this->doctor = Hospital::mapStaff[idStaff];
+    //this->staff = Hospital::mapStaff[idStaff];
 }
 
 void Appointment::removeAppointment()

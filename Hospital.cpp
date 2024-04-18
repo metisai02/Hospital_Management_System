@@ -1,44 +1,69 @@
 #include "Hospital.h"
+#include <sstream>
+#include <string>
+#include <fstream>
+
+#include "Patient.h"
+#include "Staff.h"
+#include "Admin.h"
 using namespace std;
+
+std::map<int, Staff> Hospital::mapStaff;
+std::map<int, Patient> Hospital::mapPatient;
+std::map<int, Appointment> Hospital::mapAppointment;
+std::map<int, Admin> Hospital::mapAdmin;
+std::map<std::string, User> Hospital::mapUser;
 
 Hospital::Hospital()
 {
 }
 void Hospital::updateStaffInformation()
 {
-    // udate staff from database
+    // update staff from database
     fstream fileStaff;
-    fileStaff.open("staff.csv", ios::app);
+    fileStaff.open("./../data/staff.csv", ios::in);
     string line, word;
     vector<string> row;
     getline(fileStaff, line);
-    stringstream ssLine(line);
-    while (!fileStaff.eof())
+
+    while (getline(fileStaff, line))
     {
+        stringstream ssLine(line);
+        row.clear();
+
         while (getline(ssLine, word, ','))
         {
             row.push_back(word);
         }
-        int id = stoi(row[0]);
-        mapStaff[id].setFirstName(row[1]);
-        mapStaff[id].setLastName(row[2]);
-        mapStaff[id].setAge(stoi(row[3]));
-        mapStaff[id].setIDNumber(row[4]);
-        // set birth day
-        std::string day, month, year;
-        std::stringstream ss(row[5]);
-        std::getline(ss, day, '/');
-        std::getline(ss, month, '/');
-        std::getline(ss, year, '/');
-        Date tmpDate;
-        tmpDate.setDay(stoi(day));
-        tmpDate.setDay(stoi(month));
-        tmpDate.setDay(stoi(year));
-        mapStaff[id].setBirthDate(tmpDate);
+        try
+        {
+            int id = stoi(row[0]);
+            mapStaff[id].setFirstName(row[1]);
+            mapStaff[id].setLastName(row[2]);
+            mapStaff[id].setAge(stoi(row[3]));
+            mapStaff[id].setIDNumber(row[4]);
 
-        mapStaff[id].setRole(row[6]);
-        mapStaff[id].setSpecialist(row[7]);
+            // set birth day
+            std::string day, month, year;
+            std::stringstream ss(row[5]);
+            std::getline(ss, day, '/');
+            std::getline(ss, month, '/');
+            std::getline(ss, year, '/');
+            Date tmpDate;
+            tmpDate.setDay(stoi(day));
+            tmpDate.setMonth(stoi(month));
+            tmpDate.setYear(stoi(year));
+            mapStaff[id].setBirthDate(tmpDate);
+            mapStaff[id].setRole(row[6]);
+            mapStaff[id].setSpecialist(row[7]);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
+
+    fileStaff.close();
 }
 void Hospital::updatePatientInformation()
 {
@@ -47,7 +72,7 @@ void Hospital::updateApointments()
 {
     // udate staff from database
     fstream fileApp;
-    fileApp.open("apointment.csv", ios::app);
+    fileApp.open("./../data/apointment.csv", ios::app);
     string line, word;
     vector<string> row;
     getline(fileApp, line);
@@ -61,7 +86,7 @@ void Hospital::updateApointments()
         int id = stoi(row[0]);
         int idStaff = stoi(row[1]);
         int idPatient = stoi(row[2]);
-        mapAppointment[id].setDocor(mapStaff[idStaff]);
+        // mapAppointment[id].setDoctor(mapStaff[idStaff]);
         mapAppointment[id].setPatient(mapPatient[idPatient]);
         std::string day, month, year, hour, min;
         std::stringstream ss(row[3]);
@@ -70,40 +95,121 @@ void Hospital::updateApointments()
         std::getline(ss, year, '/');
         Date tmpDate;
         tmpDate.setDay(stoi(day));
-        tmpDate.setDay(stoi(month));
-        tmpDate.setDay(stoi(year));
-        std::stringstream ss(row[4]);
-        std::getline(ss, hour, ':');
-        std::getline(ss, min, ':');
+        tmpDate.setMonth(stoi(month));
+        tmpDate.setYear(stoi(year));
+        std::stringstream ss1(row[4]);
+        std::getline(ss1, hour, ':');
+        std::getline(ss1, min, ':');
         tmpDate.setMin(stoi(min));
         tmpDate.setHour(stoi(hour));
         mapAppointment[id].setDateSchedule(tmpDate);
     }
 }
+void Hospital::updateUsers()
+{
+    // update staff from database
+    fstream fileUser;
+    fileUser.open("./../data/user.csv", ios::in);
+    string line, word;
+    vector<string> row;
+    getline(fileUser, line);
+
+    while (getline(fileUser, line))
+    {
+        stringstream ssLine(line);
+        row.clear();
+
+        while (getline(ssLine, word, ','))
+        {
+            row.push_back(word);
+        }
+        try
+        {
+            std::string userName = row[1];
+            mapUser[userName].setID(stoi(row[0]));
+            mapUser[userName].setUserName(userName);
+            mapUser[userName].setPassWord(row[2]);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    fileUser.close();
+}
 void Hospital::displayStaffs()
 {
-    cout << "Display all of staff!\n";
+    cout << "Display all of staffs!\n";
     for (auto &staff : mapStaff)
     {
-        cout << "The staff ID is: " << staff.first << endl
-             << "The role of staff is: " << staff.second.getRole()
-             << "Name is " << staff.second.getFirstName() << " " << staff.second.getLastName() << endl
-             << "The specialization is " << staff.second.getSpecialist() << endl;
+        staff.second.displayDetail();
     }
 }
 void Hospital::displayPatient()
 {
-    cout << "Display all of staff!\n";
-    for (auto &staff : mapStaff)
-    {
-        cout << "The staff ID is: " << staff.first << endl
-             << "The role of staff is: " << staff.second.getRole()
-             << "Name is " << staff.second.getFirstName() << " " << staff.second.getLastName() << endl
-             << "The specialization is " << staff.second.getSpecialist() << endl;
-    }
+    // cout << "Display all of patients!\n";
+    // for (auto &patient : mapPatient)
+    // {
+    //     cout << "The patient ID is: " << patient.first << endl
+    //          << patient.second.displayDetail();
+    // }
 }
 void Hospital::displayAppointment()
 {
+}
+void Hospital::login()
+{
+    std::string userName;
+    std::string passWord;
+    cout << "WELCOM TO HOSPITAL SYSTEM \n";
+    cout << "Enter your user name: ";
+    cin >> userName;
+    cout << "Enter your password: ";
+    cin >> passWord;
+    auto it = mapUser.find(userName);
+    if (it != mapUser.end())
+    {
+        if (it->second.getPassWord() == passWord)
+        {
+            cout << "LOGIN SUCCEESFULLY\n";
+        }
+        else
+        {
+            cout << "Your password is not correctly\n";
+        }
+    }
+    else
+    {
+        cout << "Could not find your username !!!!\n";
+    }
+}
+void Hospital::logout()
+{
+}
+void Hospital::registerAccount()
+{
+    cout << "WELCOM TO REGISTER NEW ACCOUNT IN HOSPITAL SYSTEM!!\n";
+    cout << "Enter account your want to register:" << endl
+         << "[1] : Staff Registeration" << endl
+         << "[2] : Patient Registeration" << endl
+         << "[3] : Admin registeration" << endl;
+    int option;
+    cout << "Enter your choice: ";
+    cin >> option;
+    Staff newStaff;
+    switch (option)
+    {
+    case 1:
+        newStaff.addPerson();
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    default:
+        break;
+    }
 }
 Hospital::~Hospital()
 {

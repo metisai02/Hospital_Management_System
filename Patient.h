@@ -3,16 +3,16 @@
 #include <iostream>
 #include <string>
 #include "Person.h"
-#pragma once
+// #pragma once
 
-class Patient:public Person
+class Patient : public Person
 {
 public:
     Patient();
     ~Patient();
+    virtual void function() override;
 
 private:
-
 };
 
 #endif

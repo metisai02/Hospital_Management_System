@@ -1,12 +1,16 @@
 #include "Date.h"
+#include <stdexcept>
+#include <iostream>
 using namespace std;
 Date::Date()
 {
+    this->min = 0;
+    this->hour = 0;
+    this->day = 0;
+    this->month = 0;
+    this->year = 0;
 }
 // Date(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-Date::~Date()
-{
-}
 
 unsigned int Date::getMin()
 {

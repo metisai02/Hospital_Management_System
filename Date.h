@@ -1,16 +1,13 @@
 #ifndef DATE_H
 #define DATE_H
-#include <stdexcept>
-#include <iostream>
 
-#pragma once
+//#pragma once
 
 class Date
 {
 public:
     Date();
     // Date(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-    ~Date();
 
     unsigned int getMin();
     void setMin(int);

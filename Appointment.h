@@ -1,32 +1,26 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <vector>
+
 #include "Staff.h"
 #include "Date.h"
 #include "Patient.h"
-#include "Hospital.h"
-#pragma once
+//#pragma once
 
 class Appointment
 {
 public:
     Appointment();
-    ~Appointment();
 
-    void setPatient(Patient &);
+    void setPatient(Patient&);
     Patient getPatient();
 
-    void setDocor(Staff &);
-    Staff getDoctor();
+    void setStaff(Staff &);
+    Staff getStaff();
 
     void setStatus(int);
     int getStatus();
-    
-    void setDateSchedule(Date);
+
+    void setDateSchedule(Date&);
     Date getDateSchedule();
     void addAppointment();
     void removeAppointment();
@@ -34,7 +28,7 @@ public:
 private:
     int id;
     Patient patient;
-    Staff doctor;
+    Staff staff;
     Date dateSchedule;
     int status;
 };

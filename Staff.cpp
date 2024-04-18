@@ -1,5 +1,11 @@
 
 #include "Staff.h"
+#include "Hospital.h"
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <string>
+
 using namespace std;
 Staff::Staff() {}
 Staff::~Staff() {}
@@ -31,22 +37,25 @@ void Staff::addPerson()
     cin >> specialization;
     setSpecialist(specialization);
     fstream fileStaff;
-    fileStaff.open("./data/staff.csv", ios::app);
+    fileStaff.open("./../data/staff.csv", ios::app);
 
-    fileStaff << getFirstName() << ','
+    fileStaff << getID() << ','
+              << getFirstName() << ','
               << getLastName() << ','
               << getAge() << ','
               << getIDNumber() << ','
+              << getBirthDate().getDay() << '/' << getBirthDate().getMonth() << '/' << getBirthDate().getYear() << ','
               << getRole() << ','
               << getSpecialist() << endl;
     fileStaff.close();
+    Hospital::mapStaff[getID()] = *this;
 }
 void Staff::checkAppointments()
 {
     int coutAppointment = 0;
     // udate staff from database
     fstream fileApp;
-    fileApp.open("apointment.csv", ios::app);
+    fileApp.open("./../data/apointment.csv", ios::app);
     string line, word;
     vector<string> row;
     getline(fileApp, line);
@@ -80,6 +89,7 @@ void Staff::checkAppointments()
             Hospital::mapAppointment[idApp].setStatus(1);
         }
     } while (control == 'N');
+    fileApp.close();
 }
 void Staff::earseAppointments(int idApp)
 {
@@ -90,6 +100,39 @@ void Staff::earseAppointments(int idApp)
     else
     {
         cout << "There is no ID appointment " << endl;
+    }
+}
+void Staff::function()
+{
+    cout << "\nChoose your option: \n"
+         << "[1]: View your information\n"
+         << "[2]: Watch all of appoitments\n"
+         << "[3]: Earse a appoitment\n"
+         << "[4]: Exit!" << endl;
+    int control;
+    bool end_program = false;
+    while (!end_program)
+    {
+        switch (control)
+        {
+        case 1:
+            this->displayDetail();
+            break;
+        case 2:
+            this->checkAppointments();
+            break;
+        case 3:
+            int appoitment;
+            cout << "Enter your earsed appoitment: ";
+            cin >> appoitment;
+            this->earseAppointments(appoitment);
+            break;
+        case 4:
+            end_program = true;
+            break;
+        default:
+            break;
+        }
     }
 }
 void Staff::removePerson()
