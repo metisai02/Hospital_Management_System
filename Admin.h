@@ -19,6 +19,8 @@ public:
     void editEquipments();
     void viewAppointments();
 
+    
+
     virtual void addPerson() override;
     virtual void removePerson() override;
     virtual void displayDetail() override;
