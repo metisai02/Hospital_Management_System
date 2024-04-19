@@ -48,9 +48,11 @@ void Admin::removePatient()
 }
 void Admin::viewEquipments()
 {
+    // todo: view all of equipments
 }
 void Admin::editEquipments()
 {
+    // todo: edit/change all of equipments
 }
 void Admin::viewAppointments()
 {
@@ -67,20 +69,23 @@ void Admin::displayDetail()
 }
 void Admin::function()
 {
-    cout << "\nChoose your option: \n"
-         << "[1]: View your information\n"
-         << "[2]: Add a doctor\n"
-         << "[3]: View all of doctors\n"
-         << "[4]: Remove a doctor\n"
-         << "[5]: view all of patients\n"
-         << "[6]: view all of Equipments\n"
-         << "[7]: Edit the status of Equipments"
-         << "[8]: Exit";
 
-    int control;
     bool end_program = false;
     while (!end_program)
     {
+        cout << "\nChoose your option: \n"
+             << "[1]: View your information\n"
+             << "[2]: Add a doctor\n"
+             << "[3]: View all of doctors\n"
+             << "[4]: Remove a doctor\n"
+             << "[5]: view all of patients\n"
+             << "[6]: view all of Equipments\n"
+             << "[7]: Edit the status of Equipments\n"
+             << "[8]: Exit\n"
+             << "Enter your choice: ";
+
+        int control;
+        cin >> control;
         switch (control)
         {
         case 1:

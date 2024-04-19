@@ -52,8 +52,8 @@ void Staff::addPerson()
 }
 void Staff::checkAppointments()
 {
-    int coutAppointment = 0;
-    // udate staff from database
+    // int coutAppointment = 0;
+    //  udate staff from database
     fstream fileApp;
     fileApp.open("./../data/apointment.csv", ios::app);
     string line, word;
@@ -104,15 +104,18 @@ void Staff::earseAppointments(int idApp)
 }
 void Staff::function()
 {
-    cout << "\nChoose your option: \n"
-         << "[1]: View your information\n"
-         << "[2]: Watch all of appoitments\n"
-         << "[3]: Earse a appoitment\n"
-         << "[4]: Exit!" << endl;
-    int control;
+
     bool end_program = false;
     while (!end_program)
     {
+        cout << "\nChoose your option: \n"
+             << "[1]: View your information\n"
+             << "[2]: Watch all of appoitments\n"
+             << "[3]: Earse a appoitment\n"
+             << "[4]: Logout!\n"
+             << "Enter your choice: ";
+        int control;
+        cin >> control;
         switch (control)
         {
         case 1:
@@ -128,6 +131,8 @@ void Staff::function()
             this->earseAppointments(appoitment);
             break;
         case 4:
+            cout << "Loggout suceecfully\n";
+            Hospital::loggedIn = false;
             end_program = true;
             break;
         default:

@@ -67,7 +67,7 @@ void User::addUser()
         std::map<std::string, User>::iterator it = Hospital::mapUser.end();
         --it;
         int id = it->second.getID();
-        cout << "TEST ID ID: " << id;
+        cout << "TEST ID ID: " << id << endl;
         setID(++id);
     }
     else

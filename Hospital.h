@@ -17,6 +17,7 @@ public:
     static void updateStaffInformation();
     static void updatePatientInformation();
     static void updateApointments();
+    static void updateAdmin();
     static void updateUsers();
 
     static void displayStaffs();
@@ -26,6 +27,7 @@ public:
     static void login();
     static void logout();
     static void registerAccount();
+
 
 private:
     friend class Appointment;
@@ -38,6 +40,7 @@ private:
     static std::map<int, Appointment> mapAppointment;
     static std::map<int, Admin> mapAdmin;
     static std::map<std::string, User> mapUser;
+    static bool loggedIn;
 };
 
 #endif

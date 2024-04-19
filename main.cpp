@@ -6,6 +6,7 @@ int main()
     Hospital lms;
     lms.updateStaffInformation();
     lms.updateUsers();
+    lms.updateAdmin();
     bool end_program = false;
 
     while (!end_program)
@@ -13,7 +14,7 @@ int main()
         cout << "\nWELCOM TO HOSPITAL SYSTEM \n"
              << "[1]: Login" << endl
              << "[2]: register new account:" << endl
-             << "[3]: Logout" << endl
+             //<< "[3]: Logout" << endl
              << "[4]: Exit" << endl
              << "[5]: Show all off staff" << endl;
         int control;

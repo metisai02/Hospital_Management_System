@@ -13,7 +13,7 @@ std::map<int, Patient> Hospital::mapPatient;
 std::map<int, Appointment> Hospital::mapAppointment;
 std::map<int, Admin> Hospital::mapAdmin;
 std::map<std::string, User> Hospital::mapUser;
-
+bool Hospital::loggedIn;
 Hospital::Hospital()
 {
 }
@@ -68,6 +68,53 @@ void Hospital::updateStaffInformation()
 void Hospital::updatePatientInformation()
 {
 }
+void Hospital::updateAdmin()
+{
+    // update staff from database
+    fstream fileAdmin;
+    fileAdmin.open("./../data/admin.csv", ios::in);
+    string line, word;
+    vector<string> row;
+    getline(fileAdmin, line);
+
+    while (getline(fileAdmin, line))
+    {
+        stringstream ssLine(line);
+        row.clear();
+
+        while (getline(ssLine, word, ','))
+        {
+            row.push_back(word);
+        }
+        try
+        {
+            int id = stoi(row[0]);
+            mapAdmin[id].setFirstName(row[1]);
+            mapAdmin[id].setLastName(row[2]);
+            mapAdmin[id].setAge(stoi(row[3]));
+            mapAdmin[id].setIDNumber(row[4]);
+
+            // set birth day
+            std::string day, month, year;
+            std::stringstream ss(row[5]);
+            std::getline(ss, day, '/');
+            std::getline(ss, month, '/');
+            std::getline(ss, year, '/');
+            Date tmpDate;
+            tmpDate.setDay(stoi(day));
+            tmpDate.setMonth(stoi(month));
+            tmpDate.setYear(stoi(year));
+            mapAdmin[id].setBirthDate(tmpDate);
+            mapAdmin[id].setRole(row[6]);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    fileAdmin.close();
+}
 void Hospital::updateApointments()
 {
     // udate staff from database
@@ -86,7 +133,7 @@ void Hospital::updateApointments()
         int id = stoi(row[0]);
         int idStaff = stoi(row[1]);
         int idPatient = stoi(row[2]);
-        // mapAppointment[id].setDoctor(mapStaff[idStaff]);
+        mapAppointment[id].setStaff(mapStaff[idStaff]);
         mapAppointment[id].setPatient(mapPatient[idPatient]);
         std::string day, month, year, hour, min;
         std::stringstream ss(row[3]);
@@ -173,6 +220,23 @@ void Hospital::login()
         if (it->second.getPassWord() == passWord)
         {
             cout << "LOGIN SUCCEESFULLY\n";
+            loggedIn = true;
+            int idNewAccount = it->second.getID();
+            auto newStaff = mapStaff.find(idNewAccount);
+            auto newPatient = mapPatient.find(idNewAccount);
+            auto newAdmin = mapAdmin.find(idNewAccount);
+            if (newStaff != mapStaff.end())
+            {
+                newStaff->second.function();
+            }
+            else if (newPatient != mapPatient.end())
+            {
+                newPatient->second.function();
+            }
+            else if (newAdmin != mapAdmin.end())
+            {
+                newAdmin->second.function();
+            }
         }
         else
         {
@@ -198,6 +262,7 @@ void Hospital::registerAccount()
     cout << "Enter your choice: ";
     cin >> option;
     Staff newStaff;
+    Admin newAdmin;
     switch (option)
     {
     case 1:
@@ -206,6 +271,7 @@ void Hospital::registerAccount()
     case 2:
         break;
     case 3:
+        newAdmin.addPerson();
         break;
     default:
         break;
