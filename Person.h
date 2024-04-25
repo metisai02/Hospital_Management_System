@@ -4,9 +4,10 @@
 #include "Date.h"
 #include <vector>
 #include "User.h"
+#include <memory>
 // #include "User.h"
 
-// #pragma once
+ #pragma once
 
 class Person : public User
 {
@@ -39,7 +40,7 @@ public:
     virtual void removePerson();
     virtual void displayDetail();
     virtual void function() = 0;
-
+    
 private:
     std::string firstName;
     std::string lastName;

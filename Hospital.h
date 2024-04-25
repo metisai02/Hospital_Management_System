@@ -35,6 +35,8 @@ private:
     friend class Admin;
     friend class User;
 
+
+    // key: ID ---> value: Staff
     static std::map<int, Staff> mapStaff;
     static std::map<int, Patient> mapPatient;
     static std::map<int, Appointment> mapAppointment;

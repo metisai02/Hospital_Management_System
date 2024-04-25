@@ -38,16 +38,17 @@ void Staff::addPerson()
     setSpecialist(specialization);
     fstream fileStaff;
     fileStaff.open("./../data/staff.csv", ios::app);
-
-    fileStaff << getID() << ','
+    fileStaff << endl
+              << getID() << ','
               << getFirstName() << ','
               << getLastName() << ','
               << getAge() << ','
               << getIDNumber() << ','
               << getBirthDate().getDay() << '/' << getBirthDate().getMonth() << '/' << getBirthDate().getYear() << ','
               << getRole() << ','
-              << getSpecialist() << endl;
+              << getSpecialist();
     fileStaff.close();
+
     Hospital::mapStaff[getID()] = *this;
 }
 void Staff::checkAppointments()

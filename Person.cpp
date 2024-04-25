@@ -4,7 +4,6 @@
 #include <fstream>
 #include <stdexcept>
 #include <vector>
-
 using namespace std;
 Person::Person()
 {
@@ -48,7 +47,6 @@ int Person::getAge()
 
 void Person::setIDNumber(string idNumber)
 {
-
     if (idNumber.size() == 10)
         this->IDNumber = idNumber;
     else
@@ -125,6 +123,7 @@ void Person::removePerson()
 void Person::displayDetail()
 {
     cout << "\nThe person is " << firstName << " " << lastName << endl
+         << "ID :" << getID() << endl
          << "Age is " << age << endl
          << "Birthday " << birthDay.getDay() << '/' << birthDay.getMonth() << '/' << birthDay.getYear() << endl
          << "ID number is " << IDNumber << endl;

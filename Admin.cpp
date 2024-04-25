@@ -15,8 +15,8 @@ void Admin::addPerson()
     setRole(role);
     fstream fileAdmin;
     fileAdmin.open("./../data/admin.csv", ios::app);
-
-    fileAdmin << getID() << ','
+    fileAdmin << endl
+              << getID() << ','
               << getFirstName() << ','
               << getLastName() << ','
               << getAge() << ','

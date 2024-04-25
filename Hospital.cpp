@@ -6,6 +6,7 @@
 #include "Patient.h"
 #include "Staff.h"
 #include "Admin.h"
+#include "CreatePerson.h"
 using namespace std;
 
 std::map<int, Staff> Hospital::mapStaff;
@@ -14,6 +15,7 @@ std::map<int, Appointment> Hospital::mapAppointment;
 std::map<int, Admin> Hospital::mapAdmin;
 std::map<std::string, User> Hospital::mapUser;
 bool Hospital::loggedIn;
+
 Hospital::Hospital()
 {
 }
@@ -28,9 +30,9 @@ void Hospital::updateStaffInformation()
 
     while (getline(fileStaff, line))
     {
+
         stringstream ssLine(line);
         row.clear();
-
         while (getline(ssLine, word, ','))
         {
             row.push_back(word);
@@ -42,7 +44,6 @@ void Hospital::updateStaffInformation()
             mapStaff[id].setLastName(row[2]);
             mapStaff[id].setAge(stoi(row[3]));
             mapStaff[id].setIDNumber(row[4]);
-
             // set birth day
             std::string day, month, year;
             std::stringstream ss(row[5]);
@@ -123,6 +124,7 @@ void Hospital::updateApointments()
     string line, word;
     vector<string> row;
     getline(fileApp, line);
+
     stringstream ssLine(line);
     while (!fileApp.eof())
     {
@@ -179,7 +181,7 @@ void Hospital::updateUsers()
         }
         catch (const std::exception &e)
         {
-            std::cerr << e.what() << '\n';
+            std::cerr << "Error in user!" << e.what() << '\n';
         }
     }
 
@@ -253,30 +255,26 @@ void Hospital::logout()
 }
 void Hospital::registerAccount()
 {
-    cout << "WELCOM TO REGISTER NEW ACCOUNT IN HOSPITAL SYSTEM!!\n";
-    cout << "Enter account your want to register:" << endl
-         << "[1] : Staff Registeration" << endl
-         << "[2] : Patient Registeration" << endl
-         << "[3] : Admin registeration" << endl;
+    cout << "WELCOME TO REGISTER NEW ACCOUNT IN HOSPITAL SYSTEM!!\n";
+    cout << "Enter account you want to register:" << endl
+         << "[1] : Staff Registration" << endl
+         << "[2] : Patient Registration" << endl
+         << "[3] : Admin Registration" << endl;
     int option;
     cout << "Enter your choice: ";
     cin >> option;
-    Staff newStaff;
-    Admin newAdmin;
-    switch (option)
+
+    std::shared_ptr<Person> newPerson = CreatePerson::createPerson(option);
+    if (newPerson)
     {
-    case 1:
-        newStaff.addPerson();
-        break;
-    case 2:
-        break;
-    case 3:
-        newAdmin.addPerson();
-        break;
-    default:
-        break;
+        newPerson->addPerson();
+    }
+    else
+    {
+        cout << "Invalid option selected." << endl;
     }
 }
+
 Hospital::~Hospital()
 {
 }

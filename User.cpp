@@ -67,15 +67,14 @@ void User::addUser()
         std::map<std::string, User>::iterator it = Hospital::mapUser.end();
         --it;
         int id = it->second.getID();
-        cout << "TEST ID ID: " << id << endl;
+        cout << "ID: " << id;
         setID(++id);
     }
     else
     {
         setID(1);
     }
-
-    fstream fileUser;
+        fstream fileUser;
     fileUser.open("./../data/user.csv", std::ios::app);
     if (fileUser.is_open())
     {

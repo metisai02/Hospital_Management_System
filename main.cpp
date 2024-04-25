@@ -4,9 +4,9 @@ using namespace std;
 int main()
 {
     Hospital lms;
-    lms.updateStaffInformation();
-    lms.updateUsers();
-    lms.updateAdmin();
+    // lms.updateUsers();
+    // lms.updateStaffInformation();
+    // lms.updateAdmin();
     bool end_program = false;
 
     while (!end_program)
