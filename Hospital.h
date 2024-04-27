@@ -34,7 +34,8 @@ private:
     friend class Staff;
     friend class Admin;
     friend class User;
-
+    friend class Patient;
+    
     static std::map<int, Staff> mapStaff;
     static std::map<int, Patient> mapPatient;
     static std::map<int, Appointment> mapAppointment;

@@ -1,2 +1,4 @@
-name,age,IDnumber
-
+IDnumber,name, age, birthDay
+5,nguyen,phong,22,1234567890,13/4/2002
+5,dao,dao,12,1234567890,12/2/2022
+5,Nguyen,Hieu,20,1234567890,23/4/2002

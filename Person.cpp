@@ -121,6 +121,7 @@ void Person::addPerson()
 }
 void Person::removePerson()
 {
+    
 }
 void Person::displayDetail()
 {

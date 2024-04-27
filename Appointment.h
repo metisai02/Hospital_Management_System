@@ -11,8 +11,8 @@ class Appointment
 public:
     Appointment();
 
-    void setPatient(Patient&);
-    Patient getPatient();
+    void setPatient(Patient *);
+    Patient* getPatient();
 
     void setStaff(Staff &);
     Staff getStaff();
@@ -24,10 +24,10 @@ public:
     Date getDateSchedule();
     void addAppointment();
     void removeAppointment();
-
+    static int getIdAppointment();
 private:
-    int id;
-    Patient patient;
+    static int idAppointment;
+    Patient *patient;
     Staff staff;
     Date dateSchedule;
     int status;

@@ -4,7 +4,9 @@
 #include "Hospital.h"
 #include <map>
 #include <fstream>
+
 using namespace std;
+
 User::User()
 {
     this->id = -1;
@@ -65,6 +67,7 @@ void User::addUser()
     if (!Hospital::mapUser.empty())
     {
         std::map<std::string, User>::iterator it = Hospital::mapUser.end();
+        cout << " curent id " <<it->second.getID();
         --it;
         int id = it->second.getID();
         cout << "TEST ID ID: " << id << endl;

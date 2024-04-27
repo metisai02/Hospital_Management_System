@@ -67,6 +67,49 @@ void Hospital::updateStaffInformation()
 }
 void Hospital::updatePatientInformation()
 {
+    fstream filePatient;
+    filePatient.open("./../data/patient.csv", ios::in);
+    string line, word;
+    vector<string> row;
+    getline(filePatient, line);
+
+    while (getline(filePatient, line))
+    {
+        stringstream ssLine(line);
+        row.clear();
+
+        while (getline(ssLine, word, ','))
+        {
+            row.push_back(word);
+        }
+        try
+        {
+            int id = stoi(row[0]);
+            mapPatient[id].setFirstName(row[1]);
+            mapPatient[id].setLastName(row[2]);
+            mapPatient[id].setAge(stoi(row[3]));
+            mapPatient[id].setIDNumber(row[4]);
+
+            // set birth day
+            std::string day, month, year;
+            std::stringstream ss(row[5]);
+            std::getline(ss, day, '/');
+            std::getline(ss, month, '/');
+            std::getline(ss, year, '/');
+            Date tmpDate;
+            tmpDate.setDay(stoi(day));
+            tmpDate.setMonth(stoi(month));
+            tmpDate.setYear(stoi(year));
+            mapPatient[id].setBirthDate(tmpDate);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        
+        
+    }
+    
 }
 void Hospital::updateAdmin()
 {
@@ -134,7 +177,7 @@ void Hospital::updateApointments()
         int idStaff = stoi(row[1]);
         int idPatient = stoi(row[2]);
         mapAppointment[id].setStaff(mapStaff[idStaff]);
-        mapAppointment[id].setPatient(mapPatient[idPatient]);
+        mapAppointment[id].setPatient(&mapPatient[idPatient]);
         std::string day, month, year, hour, min;
         std::stringstream ss(row[3]);
         std::getline(ss, day, '/');
@@ -204,6 +247,7 @@ void Hospital::displayPatient()
 }
 void Hospital::displayAppointment()
 {
+
 }
 void Hospital::login()
 {
@@ -263,12 +307,14 @@ void Hospital::registerAccount()
     cin >> option;
     Staff newStaff;
     Admin newAdmin;
+    Patient newPatient;
     switch (option)
     {
     case 1:
         newStaff.addPerson();
         break;
     case 2:
+        newPatient.addPerson();
         break;
     case 3:
         newAdmin.addPerson();

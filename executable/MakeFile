@@ -16,5 +16,5 @@ $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
-# clean:
-# 	rm -f %.o %.exe
+#clean:
+# 	rm  %.o %.exe

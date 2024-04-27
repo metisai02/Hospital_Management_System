@@ -25,6 +25,7 @@ void Staff::displayDetail()
     cout << "\nThis is the informations of staff!!" << endl;
     Person::displayDetail();
     cout << "Specialization of staff is " << this->specialization << endl;
+    cout << "ID of staff is " << this->getID() << endl;
 }
 void Staff::addPerson()
 {
@@ -55,7 +56,7 @@ void Staff::checkAppointments()
     // int coutAppointment = 0;
     //  udate staff from database
     fstream fileApp;
-    fileApp.open("./../data/apointment.csv", ios::app);
+    fileApp.open("./../data/appointment.csv", ios::app);
     string line, word;
     vector<string> row;
     getline(fileApp, line);
